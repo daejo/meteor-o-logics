@@ -13,7 +13,7 @@ A website where you can get accurate weather updates anywhere, anytime.
 
 
 ## Website
-https://daejo.github.io/wd-sched/
+https://daejo.github.io/meteor-o-logics/
 
 ## Contribution
 Created by David Joaquin
