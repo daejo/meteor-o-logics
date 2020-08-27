@@ -1,5 +1,5 @@
 /*  CREATE A WEATHER APP
-    
+
     * Search for a city's weather conditions
         - Create framework and flow.
         - Add form for text to be inputed in.
@@ -18,5 +18,6 @@
 
     * Search history search
         - Use stored local data city names
-        - Display the current and future conditions upon clicking a city name in the search history.
+        - Display the current and future conditions of a city upon clicking a it's name in the search history.
 */
+

@@ -1,7 +1,7 @@
 # David Joaquin's Weather App
 
 ## Purpose
-A website where you can get accurate weather updates anywhere, anytime.
+Travel with no worries and be ready for anything, knowing you'll get accurate weather updates anywhere, anytime.
 
 
 ![Screenshot](./assets/images/screenshot.png)
