@@ -19,9 +19,16 @@
     * Search history search
         - Use stored local data city names
         - Display the current and future conditions of a city upon clicking a it's name in the search history.
+
 */
+
 var cityInputEl = document.querySelector ("#city-search");
 var citySearchTerm = document.querySelector("#city-search-term");
 var cityFormEl = document.querySelector("#city-form");
+var apiUrl = ;
+var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12";
+
+
+
 
 cityFormEl.addEventListener("submit", formSubmitHandler);
