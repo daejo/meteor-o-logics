@@ -30,15 +30,37 @@
                     <input name="city" id="city-search" type="text" autofocus="true" class="form-input" />
                     <button type="submit" class="btn bg-secondary text-white">Find City</button>
                     </form>
-                    <h3 id="city-list" class="card-header border border-light">Here</h3>
+                    <div class="card search-list">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                          </ul>
+                    </div>
                 </div>
             </div>
 
             <div class="col-12 col-sm-8">
-                <div class="card">
-                    <h3 class="card-header bg-light text-dark text-center" id="city-search-term">City Name</h3>
-                    <p></p>
-                
+                <div class="card city-row text-center">
+                    <h3 class="card-header bg-light text-dark" id="city-search-term">City Name</h3>
+                    <p class="card-body date-display">Date/Time display</p>
+                    <div class="row text-center" id="display-row">
+                        <div class="col-sm-3">Temperature: <p id="temp-display">30&deg;C</p></div>
+                        <div class="col-sm-3">Humidity: <p id="humid-display">30&deg;C</p></div>
+                        <div class="col-sm-3">Wind Speed: <p id="temp-display">30&deg;C</p></div>
+                        <div class="col-sm-3">UV Index: <p id="humid-display">30&deg;C</p></div>
+                    </div>
+                </div>
+
+                <div class="card past-forecast">
+                    <div class="row text-center" id="past-row">
+                        <div class="col-sm-2 bg-white">5 Day Forecast</div>
+                        <div class="col-sm-2 bg-dark first-day">first day</div>
+                        <div class="col-sm-2 bg-primary second-day">second day</div>
+                        <div class="col-sm-2 bg-danger third-day">third day</div>
+                        <div class="col-sm-2 bg-warning fourth-day">fourth day</div>
+                        <div class="col-sm-2 bg-secondary fifth-day">fifth day</div>
+                    </div>
                 </div>
             </div>
         </div>
