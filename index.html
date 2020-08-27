@@ -9,27 +9,43 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Meteor-o-Logical</title>
+    <title>Meteor-o-Logics</title>
 </head>
 
 <body class="flex-column min-100-vh">
-    <header class="jumbotron col-sm-12 bg-dark sticky-top text-center"> 
-        <h1 class="display-2 bg-black text-white">Meteor-o-Logical</h1>
+    
+    <header class="jumbotron col-md-12 bg-dark sticky-top text-center"> 
+        <h1 class="display-2 bg-black text-white">Meteor-o-Logics</h1>
         <p class="lead bg-secondary text-white">Get accurate weather updates anytime, anywhere.</p>
         <p id="currentDay" class="lead text-white"></p>
       </header>
 
-    <container class="flex-row justify-space-between">
-        <div class="col-12 col-md-4">
-          <div class="card">
-            <h3 class="card-header">Search for a City:</h3>
-            <form id="user-form" class="card-body">
-              <input name="city" id="city" type="text" autofocus="true" class="form-input" />
-              <button type="submit" class="btn">Find City</button>
-            </form>
-            <h3 id="city-list" class="card-header">Here</h2>
-          </div>
-    </container>
+  
+    <div class="container flex-row justify-space-between">
+        <div class="row" id="top-row">
+            <div class="col-12 col-md-4">
+                <div class="card rounded-top">
+                    <h3 class="card-header bg-secondary text-white">Search for a City:</h3>
+                    <form id="user-form" class="card-body">
+                    <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" class="btn bg-secondary text-white">Find City</button>
+                    </form>
+                    <h3 id="city-list" class="card-header border border-light">Here</h3>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-8">
+                <div class="card">
+                    <h3 class="card-header bg-light text-dark text-center">City Name</h3>
+                    <p></p>
+                
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
