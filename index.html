@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Meteor-o-Logics</title>
 </head>
 
@@ -28,7 +28,7 @@
                     <h3 class="card-header bg-secondary text-white">Search for a City:</h3>
                     <form id="city-form" class="card-body">
                     <input name="city" id="city-search" type="text" autofocus="true" class="form-input" />
-                    <button type="submit" class="btn bg-secondary text-white">Find City</button>
+                    <button type="submit" id= "Submit" class="btn bg-secondary text-white">Find City</button>
                     </form>
                     <div class="card search-list">
                         <ul class="list-group list-group-flush">
@@ -43,7 +43,7 @@
             <div class="col-12 col-sm-8">
                 <div class="card city-row text-center">
                     <h3 class="card-header bg-light text-dark" id="city-search-term">City Name</h3>
-                    <p class="card-body date-display">Date/Time display</p>
+                    <p class="card-text date-display">Date/Time display</p>
                     <div class="row text-center" id="display-row">
                         <div class="col-sm-3">Temperature: <p id="temp-display">30&deg;C</p></div>
                         <div class="col-sm-3">Humidity: <p id="humid-display">30&deg;C</p></div>
@@ -63,6 +63,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
 
@@ -70,6 +71,6 @@
 
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 </html>

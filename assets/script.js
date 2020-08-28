@@ -21,13 +21,46 @@
         - Display the current and future conditions of a city upon clicking a it's name in the search history.
 
 */
-var cityInputEl = document.querySelector ("#city-search");
-var citySearchTerm = document.querySelector("#city-search-term");
-var cityFormEl = document.querySelector("#city-form");
-var apiUrl = "pro.openweathermap.org/data/2.5/forecast/hourly?"; // Open Weather API URL
-var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12"; // My Openweather API key.
 
 
+$(document).ready(function() {
+
+    var citySearchTerm = document.getElementById("city-search-term");
+    var cityFormEl = document.getElementById("city-form");
+  
+   
+
+    $("#Submit").on("click", function() {
+        var cityInputEl = $("#city-search").val();
+
+        var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12"; // My Openweather API key.
+        
+        var weatherURL = "api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&appid=" + apiKey; // Current Weather API URL.
+       
+        var forecastURL = "api.openweathermap.org/data/2.5/forecast?q=" + cityInputEl + "&appid=" + apiKey; //Forecast API URL.
+        
+        $.ajax({
+            url: weatherURL,
+            method: "GET"
+        }).then(function(res) {
+            console.log(res);
+
+            var lat = res.coord.lat;
+            var long = res.coord.long;
+
+            $.ajax({
+                url: forecastURL,
+                method: "GET"
+            }).then(function(res) {
+                console.log(res);
+    
+                var lat = res.coord.lat;
+                var long = res.coord.long;
+            })
+
+        })
+        
+    })
 
 
-cityFormEl.addEventListener("submit", formSubmitHandler);
+})
