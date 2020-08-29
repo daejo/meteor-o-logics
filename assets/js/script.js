@@ -87,30 +87,58 @@ fetch(sampleUrl).then(function(response) {
           })
             .then(function(response) {
                 console.log(response);
-                // console.log(Math.floor((response.list[8].main.temp - 273.15) * 9/5 + 32));
                 /* FIRSTDAY */
+                var firstDateEl = document.getElementById("first-date");
+                var dateOne = response.list[3].dt_txt;
+                firstDateEl.innerText = dateOne.substr(5,11);
+
                 var firstTempEl =  document.getElementById("first-temp");
-                firstTempEl.innerHTML = response.list[0].main.temp + "&deg;F";
+                firstTempEl.innerHTML = response.list[3].main.temp + "&deg;F";
+
                 var firstHumidEl = document.getElementById("first-humid");
-                firstHumidEl.innerText = response.list[0].main.humidity + "%";
+                firstHumidEl.innerText = response.list[3].main.humidity + "%";
+                
                 /* SECONDDAY */
+                var secondDateEl = document.getElementById("second-date");
+                var dateTwo = response.list[11].dt_txt;
+                secondDateEl.innerText = dateTwo.substr(5,11);
+
                 var secondTempEl =  document.getElementById("second-temp");
-                secondTempEl.innerHTML = response.list[8].main.temp + "&deg;F";
+                secondTempEl.innerHTML = response.list[11].main.temp + "&deg;F";
+
                 var secondHumidEl = document.getElementById("second-humid");
-                secondHumidEl.innerText = response.list[8].main.humidity + "%";
+                secondHumidEl.innerText = response.list[11].main.humidity + "%";
+                
                 /* THIRDDAY */
+                var thirdDateEl = document.getElementById("third-date");
+                var dateThree = response.list[19].dt_txt;
+                thirdDateEl.innerText = dateThree.substr(5,11);
+                
                 var thirdTempEl =  document.getElementById("third-temp");
-                thirdTempEl.innerHTML = response.list[17].main.temp + "&deg;F";
+                thirdTempEl.innerHTML = response.list[19].main.temp + "&deg;F";
+                
                 var thirdHumidEl = document.getElementById("third-humid");
-                thirdHumidEl.innerText = response.list[17].main.humidity + "%";
+                thirdHumidEl.innerText = response.list[19].main.humidity + "%";
+                
                 /* FOURTHDAY */
+                var fourthDateEl = document.getElementById("fourth-date");
+                var dateFour = response.list[19].dt_txt;
+                fourthDateEl.innerText = dateFour.substr(5,11);
+                
                 var fourthTempEl =  document.getElementById("fourth-temp");
-                fourthTempEl.innerHTML = response.list[26].main.temp + "&deg;F";
+                fourthTempEl.innerHTML = response.list[27].main.temp + "&deg;F";
+                
                 var fourthHumidEl = document.getElementById("fourth-humid");
-                fourthHumidEl.innerText = response.list[26].main.humidity + "%";
+                fourthHumidEl.innerText = response.list[27].main.humidity + "%";
+                
                 /* FIFTHDAY */
+                var fifthDateEl = document.getElementById("fifth-date");
+                var dateFive = response.list[35].dt_txt;
+                fifthDateEl.innerText = dateFive.substr(5,11);
+                
                 var fifthTempEl =  document.getElementById("fifth-temp");
                 fifthTempEl.innerHTML = response.list[35].main.temp + "&deg;F";
+                
                 var fifthHumidEl = document.getElementById("fifth-humid");
                 fifthHumidEl.innerText = response.list[35].main.humidity + "%";
         
