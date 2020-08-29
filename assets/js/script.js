@@ -28,7 +28,7 @@ var findCityEl = document.querySelector("#Submit");
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
-var sampleUrl = "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
+var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
 
 
 // fetch(sampleUrl).then((data) => { 
@@ -37,23 +37,32 @@ var sampleUrl = "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=
 // });
 
 fetch(sampleUrl)
-    // Convert the response to JSON
     .then(function(response) {
       return response.json();
     })
     .then(function(response) {
         console.log(response)
+        /* DATE */
+        // var dateEl = document.getElementById("date-display");
+        // dateEl.innerHTML = response.list[0].dt_txt;
+
         /* TEMPERATURE */  
         var tempEl = document.getElementById("temp-display"); 
-        tempEl.innerHTML = (Math.floor((response.list[0].main.temp - 273.15) * 9/5 + 32)) + "&deg;F"; //Converts, Rounds off and displays Temperature from K to F.
+        tempEl.innerHTML = (Math.floor((response.main.temp - 273.15) * 9/5 + 32)) + "&deg;F"; //Converts, Rounds off and displays Temperature from K to F.
 
         /* HUMIDITY */  
         var humidEl = document.getElementById("humid-display"); 
-        humidEl.innerHTML = response.list[0].main.humidity + "&deg;F";
+        humidEl.innerHTML = response.main.humidity + "%";
         
         /* WIND SPEED */  
-        var humidEl = document.getElementById("wind-display"); 
-        humidEl.innerHTML = response.list[0].wind.speed + "mph"; 
+        var windEl = document.getElementById("wind-display"); 
+        windEl.innerHTML = response.wind.speed + "mph";
+        
+        /* UV */  
+        var uvEl = document.getElementById("uv-display"); 
+        uvEl.innerHTML = response.list[0].wind.speed + "mph";
+        
+        var coord = document.getElementById("uv-display");
     });
 
 
