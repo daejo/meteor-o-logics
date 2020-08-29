@@ -28,8 +28,9 @@ var findCityEl = document.querySelector("#Submit");
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?cnt=6&q=London"
 var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
-var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" // My UV API
+var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" // UV API
 
 
 /* WEATHER API */
@@ -45,18 +46,15 @@ fetch(sampleUrl).then(function(response) {
 
         /* HUMIDITY */  
         var humidEl = document.getElementById("humid-display"); 
-        humidEl.innerHTML = response.main.humidity + "%";
+        humidEl.innerText = response.main.humidity + "%";
         
         /* WIND SPEED */  
         var windEl = document.getElementById("wind-display"); 
-        windEl.innerHTML = response.wind.speed + "mph";
+        windEl.innerText = response.wind.speed + "mph";
         
         var lon = response.coord.lon;
-        console.log(lon)
         var lat = response.coord.lat;
-        console.log(lat)
         var coord = "&lat=" + lat + "&lon=" + lon;
-        // return coord
 
         /* UV API */
         fetch(uvUrl + apiKey + coord).then(function(response) {
@@ -64,10 +62,30 @@ fetch(sampleUrl).then(function(response) {
           })
             .then(function(response) {
                 var uvEl =  document.getElementById("uv-display");
-                uvEl.innerHTML = response.value
+                uvEl.innerText = response.value
+                if (response.value < 5){
+                    var color = document.getElementById("uv")
+                    color.classList.add("bg-success");
+                } else if (response.value < 10){
+                    var color = document.getElementById("uv")
+                    color.classList.add("bg-warning");
+                } else if (response.value > 9){
+                    var color = document.getElementById("uv")
+                    color.classList.add("bg-danger");
+                }
             
         });
-        
+
+        /* FORECAST API */
+        fetch(forecastUrl + "&appid=" + apiKey).then(function(response) {
+            return response.json();
+          })
+            .then(function(response) {
+                console.log(response)
+                var firstDateEl =  document.getElementById("first-date");
+                firstDateEl.innerText = response.value
+            
+        });
 
 });
 
