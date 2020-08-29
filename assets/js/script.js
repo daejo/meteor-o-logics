@@ -29,22 +29,17 @@ var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
 var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
+var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" // &lat={lat}&lon={lon}
+var coord = "";
 
 
-// fetch(sampleUrl).then((data) => { 
-//     console.log("response", data.json())
 
-// });
-
-fetch(sampleUrl)
-    .then(function(response) {
+/* WEATHER API */
+fetch(sampleUrl).then(function(response) {
       return response.json();
     })
     .then(function(response) {
-        console.log(response)
-        /* DATE */
-        // var dateEl = document.getElementById("date-display");
-        // dateEl.innerHTML = response.list[0].dt_txt;
+        // console.log(response)
 
         /* TEMPERATURE */  
         var tempEl = document.getElementById("temp-display"); 
@@ -58,12 +53,38 @@ fetch(sampleUrl)
         var windEl = document.getElementById("wind-display"); 
         windEl.innerHTML = response.wind.speed + "mph";
         
-        /* UV */  
-        var uvEl = document.getElementById("uv-display"); 
-        uvEl.innerHTML = response.list[0].wind.speed + "mph";
+        // var coord = response.coord;
+        console.log(reponse.coord.lon);
+        // return coord
+});
+
+fetch(uvUrl + apiKey + "&lat=37.75&lon=-122.37").then(function(response) {
+    return response.json();
+  })
+  .then(function(response) {
+      console.log(response)
+      var uvEl =  document.getElementById("uv-display");
+      uvEl.innerHTML = response.value
+
+    
+});
+
+
+
+/* UV API */
+// fetch(sampleUrl)
+//     .then(function(response) {
+//       return response.json();
+//     })
+//     .then(function(response) {
+//         console.log(response)
         
-        var coord = document.getElementById("uv-display");
-    });
+//         /* UV */  
+//         var uvEl = document.getElementById("uv-display"); 
+//         uvEl.innerHTML = response.list[0].wind.speed + "mph";
+//     });
+
+            
 
 
 
