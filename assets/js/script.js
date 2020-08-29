@@ -1,0 +1,57 @@
+/*  CREATE A WEATHER APP
+
+    * Search for a city's weather conditions
+        - Create framework and flow.
+        - Add form for text to be inputed in.
+        - Add search function to look for cities.
+        - Present current and future conditions for that city and that city is added to the search history.
+    
+    * Display current weather conditions for that city
+        - Display name of city searched.
+        - Display date
+        - Display an icon for weather condition representation.
+        - Display temperature, humidity, wind speed, and UV index.
+
+    * UV index and future weather conditions
+        - Display color that indicates weather conditions as favorable, moderate, or severe.
+        - Present a 5-day forecast that displays date, icon of weather conditions, temperature, and humidity.
+
+    * Search history search
+        - Use stored local data city names
+        - Display the current and future conditions of a city upon clicking a it's name in the search history.
+
+*/
+var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12"; // My Openweather API key.
+// var weatherURL = "api.openweathermap.org/data/2.5/weather?q=" + cityInputEl + "&appid=" + apiKey; // Current Weather API URL.
+// var forecastURL = "api.openweathermap.org/data/2.5/forecast?q=" + cityInputEl + "&appid=" + apiKey; //Forecast API URL.
+var findCityEl = document.querySelector("#Submit");
+var cityFormEl = document.querySelector("#city-form");
+var cityInputEl = document.getElementById("city-search");
+var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
+var sampleUrl = "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
+
+
+// fetch(sampleUrl).then((data) => { 
+//     console.log("response", data.json())
+
+// });
+
+fetch(sampleUrl)
+    // Convert the response to JSON
+    .then(function(response) {
+        
+      return response.json();
+    })
+    .then(function(response) {
+        // console.log(response.list[0].main.temp)  
+        var tempEl = document.getElementById("temp-display");
+        tempEl.innerHTML = response.list[0].main.temp + "&deg;C";
+
+    });
+
+
+
+
+
+
+
