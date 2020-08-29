@@ -22,17 +22,13 @@
 
 */
 var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12"; // My Openweather API key.
-// var forecastURL = "api.openweathermap.org/data/2.5/forecast?q=" + cityInputEl + "&appid=" + apiKey; //Forecast API URL.
-var findCityEl = document.querySelector("#Submit");
+var findCityEl = document.querySelector("#Submit"); //
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
 var submitBtn = document.getElementById("Submit")
-var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=";
-var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=London"
-var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
-var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" // UV API
-var uvDisplayEl = document.getElementById("uvColor");
-var tempColor = document.getElementById("tempColor");
+var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
+var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=" //5-day Weather Forecast
+var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?" // UV API
 
 var formSubmit = function(event) {
     event.preventDefault();
@@ -53,12 +49,12 @@ var searchCity = function(value) {
             /* TEMPERATURE */  
             var tempEl = document.getElementById("temp-display");
             tempEl.innerHTML = response.main.temp + "&deg;F"; 
-            if (response.main.tempp < 70){            
-                tempColor.classList.add("bg-gradient-primary");
+            if (response.main.temp < 70){            
+                tempColor.setAttribute("style", "background-image: linear-gradient(45deg, hsl(231, 100%, 56%) 0%, #2BD2FF 52%, #a8cbff 90%); color: white;");
             } else if (response.main.temp < 90){
-                tempColor.classList.add("bg-gradient-warning");
+                tempColor.setAttribute("style", "background-image: linear-gradient(45deg, hsl(46, 100%, 30%) 0%, #e2c000 52%, #ffd900 90%); color: white;");
             } else if (response.main.temp > 90){
-                tempColor.classList.add("bg-gradient-danger");
+                tempColor.setAttribute("style", "background-image: linear-gradient(45deg, hsl(0, 100%, 50%) 0%, #e66f00 52%, #ff7c01 90%); color: white;");
             };
 
             /* HUMIDITY */  
@@ -68,92 +64,88 @@ var searchCity = function(value) {
             /* WIND SPEED */  
             var windEl = document.getElementById("wind-display"); 
             windEl.innerText = response.wind.speed + "mph";
-            
-            var lon = response.coord.lon;
-            var lat = response.coord.lat;
-            var coord = "&lat=" + lat + "&lon=" + lon;
+
+            var coordinates = "&lon=" + response.coord.lon + "&lat=" + response.coord.lat
+            console.log(coordinates)
 
             /* UV API */
-            fetch(uvUrl + apiKey + coord).then(function(response) {
-                return response.json();
-            })
-                .then(function(response) {
-                    var uvEl =  document.getElementById("uv-display");
-                    uvEl.innerText = response.value
-                    if (response.value < 5){
-                        uvDisplayEl.classList.add("bg-gradient-primary");
-                    } else if (response.value > 4){
-                        uvDisplayEl.classList.add("bg-gradient-warning");
-                    } else if (response.value > 9){
-                        uvDisplayEl.classList.add("bg-gradient-danger");
-                    };
-                
-            });
-
-            /* FORECAST API */
-            fetch(forecastUrl + "&appid=" + apiKey).then(function(response) {
-                return response.json();
-            })
+        fetch(uvUrl + coordinates + "&appid=" + apiKey).then(function(response) {
+            return response.json();
+        })
             .then(function(response) {
-                console.log(response);
-                /* FIRSTDAY */
-                var firstDateEl = document.getElementById("first-date");
-                var dateOne = response.list[3].dt_txt;
-                firstDateEl.innerText = dateOne.substr(5,6); // .substr(string start, # of characters included)
-
-                var firstTempEl =  document.getElementById("first-temp");
-                firstTempEl.innerHTML = response.list[3].main.temp + "&deg;F";
-
-                var firstHumidEl = document.getElementById("first-humid");
-                firstHumidEl.innerText = response.list[3].main.humidity + "%";
-                
-                /* SECONDDAY */
-                var secondDateEl = document.getElementById("second-date");
-                var dateTwo = response.list[11].dt_txt;
-                secondDateEl.innerText = dateTwo.substr(5,6);
-
-                var secondTempEl =  document.getElementById("second-temp");
-                secondTempEl.innerHTML = response.list[11].main.temp + "&deg;F";
-
-                var secondHumidEl = document.getElementById("second-humid");
-                secondHumidEl.innerText = response.list[11].main.humidity + "%";
-                
-                /* THIRDDAY */
-                var thirdDateEl = document.getElementById("third-date");
-                var dateThree = response.list[19].dt_txt;
-                thirdDateEl.innerText = dateThree.substr(5,6);
-                
-                var thirdTempEl =  document.getElementById("third-temp");
-                thirdTempEl.innerHTML = response.list[19].main.temp + "&deg;F";
-                
-                var thirdHumidEl = document.getElementById("third-humid");
-                thirdHumidEl.innerText = response.list[19].main.humidity + "%";
-                
-                /* FOURTHDAY */
-                var fourthDateEl = document.getElementById("fourth-date");
-                var dateFour = response.list[19].dt_txt;
-                fourthDateEl.innerText = dateFour.substr(5,6);
-                
-                var fourthTempEl =  document.getElementById("fourth-temp");
-                fourthTempEl.innerHTML = response.list[27].main.temp + "&deg;F";
-                
-                var fourthHumidEl = document.getElementById("fourth-humid");
-                fourthHumidEl.innerText = response.list[27].main.humidity + "%";
-                
-                /* FIFTHDAY */
-                var fifthDateEl = document.getElementById("fifth-date");
-                var dateFive = response.list[35].dt_txt;
-                fifthDateEl.innerText = dateFive.substr(5,6);
-                
-                var fifthTempEl =  document.getElementById("fifth-temp");
-                fifthTempEl.innerHTML = response.list[35].main.temp + "&deg;F";
-                
-                var fifthHumidEl = document.getElementById("fifth-humid");
-                fifthHumidEl.innerText = response.list[35].main.humidity + "%";     
+                var uvEl =  document.getElementById("uv-display");
+                uvEl.innerText = response.value
+                if (response.value < 5){
+                    uvDisplayEl.setAttribute("style", "background-image: linear-gradient(45deg, hsl(106, 100%, 21%) 0%, #0a9922 52%, #15ff00 90%); color: white;");
+                } else if (response.value > 4){
+                    uvDisplayEl.setAttribute("style", "background-image: linear-gradient(45deg, hsl(46, 100%, 30%) 0%, #e2c000 52%, #ffd900 90%); color: white;");
+                } else if (response.value > 8){
+                    uvDisplayEl.setAttribute("style", "background-image: linear-gradient(45deg, hsl(0, 100%, 50%) 0%, #e66f00 52%, #ff7c01 90%); color: white;");
+                };
+            
             });
-        });
-    
+        });   
 
+    /* FORECAST API */
+    fetch(forecastUrl + value + "&appid=" + apiKey).then(function(response) {
+        return response.json();
+    })
+    .then(function(response) {
+        /* FIRSTDAY */
+        var firstDateEl = document.getElementById("first-date");
+        var dateOne = response.list[3].dt_txt;
+        firstDateEl.innerText = dateOne.substr(5,6); // .substr(string start, # of characters included)
+
+        var firstTempEl =  document.getElementById("first-temp");
+        firstTempEl.innerHTML = response.list[3].main.temp + "&deg;F";
+
+        var firstHumidEl = document.getElementById("first-humid");
+        firstHumidEl.innerText = response.list[3].main.humidity + "%";
+        
+        /* SECONDDAY */
+        var secondDateEl = document.getElementById("second-date");
+        var dateTwo = response.list[11].dt_txt;
+        secondDateEl.innerText = dateTwo.substr(5,6);
+
+        var secondTempEl =  document.getElementById("second-temp");
+        secondTempEl.innerHTML = response.list[11].main.temp + "&deg;F";
+
+        var secondHumidEl = document.getElementById("second-humid");
+        secondHumidEl.innerText = response.list[11].main.humidity + "%";
+        
+        /* THIRDDAY */
+        var thirdDateEl = document.getElementById("third-date");
+        var dateThree = response.list[19].dt_txt;
+        thirdDateEl.innerText = dateThree.substr(5,6);
+        
+        var thirdTempEl =  document.getElementById("third-temp");
+        thirdTempEl.innerHTML = response.list[19].main.temp + "&deg;F";
+        
+        var thirdHumidEl = document.getElementById("third-humid");
+        thirdHumidEl.innerText = response.list[19].main.humidity + "%";
+        
+        /* FOURTHDAY */
+        var fourthDateEl = document.getElementById("fourth-date");
+        var dateFour = response.list[19].dt_txt;
+        fourthDateEl.innerText = dateFour.substr(5,6);
+        
+        var fourthTempEl =  document.getElementById("fourth-temp");
+        fourthTempEl.innerHTML = response.list[27].main.temp + "&deg;F";
+        
+        var fourthHumidEl = document.getElementById("fourth-humid");
+        fourthHumidEl.innerText = response.list[27].main.humidity + "%";
+        
+        /* FIFTHDAY */
+        var fifthDateEl = document.getElementById("fifth-date");
+        var dateFive = response.list[35].dt_txt;
+        fifthDateEl.innerText = dateFive.substr(5,6);
+        
+        var fifthTempEl =  document.getElementById("fifth-temp");
+        fifthTempEl.innerHTML = response.list[35].main.temp + "&deg;F";
+        
+        var fifthHumidEl = document.getElementById("fifth-humid");
+        fifthHumidEl.innerText = response.list[35].main.humidity + "%";     
+    });    
 };
 
 submitBtn.addEventListener("click", formSubmit);
