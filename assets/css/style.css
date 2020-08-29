@@ -1,0 +1,15 @@
+.bg-gradient-primary {
+    background-image: linear-gradient(45deg, hsl(231, 100%, 56%) 0%, #2BD2FF 52%, #a8cbff 90%);
+}
+
+.bg-gradient-warning {
+    background-image: linear-gradient(45deg, hsl(46, 100%, 30%) 0%, #e2c000 52%, #ffd900 90%);
+}
+
+.bg-gradient-danger {
+    background-image: linear-gradient(45deg, hsl(0, 100%, 50%) 0%, #e66f00 52%, #ff7c01 90%);
+}
+
+.bg-gradient-success {
+    background-image: linear-gradient(45deg, hsl(106, 100%, 21%) 0%, #0a9922 52%, #15ff00 90%);
+}

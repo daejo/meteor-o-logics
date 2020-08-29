@@ -32,7 +32,6 @@ var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?cnt=6&q=Londo
 var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
 var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" // UV API
 
-
 /* WEATHER API */
 fetch(sampleUrl).then(function(response) {
       return response.json();
@@ -41,8 +40,19 @@ fetch(sampleUrl).then(function(response) {
         // console.log(response)
 
         /* TEMPERATURE */  
-        var tempEl = document.getElementById("temp-display"); 
-        tempEl.innerHTML = (Math.floor((response.main.temp - 273.15) * 9/5 + 32)) + "&deg;F"; //Converts, Rounds off and displays Temperature from K to F.
+        var tempEl = document.getElementById("temp-display");
+        var convertedTemp = (Math.floor((response.main.temp - 273.15) * 9/5 + 32)); //Converts, Rounds off and displays Temperature from K to F.
+        tempEl.innerHTML = convertedTemp + "&deg;F"; 
+        if (convertedTemp < 70){
+            var color = document.getElementById("temp")
+            color.classList.add("bg-gradient-primary");
+        } else if (response.value < 90){
+            var color = document.getElementById("temp")
+            color.classList.add("bg-gradient-warning");
+        } else if (response.value > 90){
+            var color = document.getElementById("temp")
+            color.classList.add("bg-gradient-danger");
+        };
 
         /* HUMIDITY */  
         var humidEl = document.getElementById("humid-display"); 
@@ -65,14 +75,14 @@ fetch(sampleUrl).then(function(response) {
                 uvEl.innerText = response.value
                 if (response.value < 5){
                     var color = document.getElementById("uv")
-                    color.classList.add("bg-success");
+                    color.classList.add("bg-gradient-success");
                 } else if (response.value < 10){
                     var color = document.getElementById("uv")
-                    color.classList.add("bg-warning");
+                    color.classList.add("bg-gradient-warning");
                 } else if (response.value > 9){
                     var color = document.getElementById("uv")
-                    color.classList.add("bg-danger");
-                }
+                    color.classList.add("bg-gradient-danger");
+                };
             
         });
 
