@@ -39,13 +39,17 @@ var sampleUrl = "http://api.openweathermap.org/data/2.5/forecast?q=London&appid=
 fetch(sampleUrl)
     // Convert the response to JSON
     .then(function(response) {
-        
       return response.json();
     })
     .then(function(response) {
-        // console.log(response.list[0].main.temp)  
-        var tempEl = document.getElementById("temp-display");
-        tempEl.innerHTML = response.list[0].main.temp + "&deg;C";
+        // console.log(response.list[0].main.temp)
+        /* TEMPERATURE */  
+        var tempEl = document.getElementById("temp-display"); 
+        tempEl.innerHTML = (Math.floor((response.list[0].main.temp - 273.15) * 9/5 + 32)) + "&deg;F"; //Converts, Rounds off and displays Temperature from K to F.
+
+        /* HUMIDITY */  
+        var humidEl = document.getElementById("humid-display"); 
+        humidEl.innerHTML = response.list[0].main.temp + "&deg;F"; 
 
     });
 
