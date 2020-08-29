@@ -12,14 +12,12 @@
     <title>Meteor-o-Logics</title>
 </head>
 
-<body class="flex-column min-100-vh">
-    
+<body class="flex-column min-100-vh">    
     <header class="jumbotron col-md-12 bg-dark sticky-top text-center"> 
         <h1 class="display-2 bg-black text-white">Meteor-o-Logics</h1>
         <p class="lead bg-secondary text-white">Get accurate weather updates anytime, anywhere.</p>
         <p id="currentDay" class="lead text-white"></p>
       </header>
-
   
     <div class="container flex-row justify-space-between">
         <div class="row" id="top-row">
@@ -45,56 +43,51 @@
                     <h3 class="card-header bg-light text-dark" id="city-search-term">City Name</h3>
                     <p class="card-text" id="date-display"></p>
                     <div class="row text-center" id="display-row">
-                        <div class="col-sm-3 pt-3 text-white" id="temp">Temperature: <p id="temp-display"></p></div>
-                        <div class="col-sm-3 pt-3" id="humid">Humidity: <p id="humid-display"></p></div>
-                        <div class="col-sm-3 pt-3" id="wind">Wind Speed: <p id="wind-display"></p></div>
-                        <div class="col-sm-3 pt-3 text-white" id="uv">UV Index: <p id="uv-display"></p></div>
+                        <div class="col-sm-3 pt-3" id="tempColor">Temperature: <p id="temp-display"></p></div>
+                        <div class="col-sm-3 pt-3" id="humidColor">Humidity: <p id="humid-display"></p></div>
+                        <div class="col-sm-3 pt-3" id="windColor">Wind Speed: <p id="wind-display"></p></div>
+                        <div class="col-sm-3 pt-3" id="uvColor">UV Index: <p id="uv-display"></p></div>
                     </div>
                 </div>
 
                 <div class="card past-forecast">
                     <div class="row text-center" id="past-row">
-                        <div class="col-sm-2 bg-white">5 Day Forecast</div>
-                            <div class="col-sm-2 bg-dark" id="first-day">
-                                <p class="first-date card-header"></p>
-                                <p class="first-icon"></p>
-                                <p class="first-temp"></p>
-                                <p class="first-humid"></p>
+                        <div class="col-sm-2">5 Day Forecast</div>
+                            <div class="col-sm-2" id="first-day">
+                                <p class="card-header" id="first-date"></p>
+                                <p id="first-icon"></p>
+                                <p id="first-temp"></p>
+                                <p id="first-humid"></p>
                             </div>
-                            <div class="col-sm-2 bg-primary" id="second-day">
-                                <p class="second-date card-header"></p>
-                                <p class="second-icon"></p>
-                                <p class="second-temp"></p>
-                                <p class="second-humid"></p>
+                            <div class="col-sm-2" id="second-day">
+                                <p class="card-header" id="second-date"></p>
+                                <p id="second-icon"></p>
+                                <p id="second-temp"></p>
+                                <p id="second-humid"></p>
                             </div>
-                            <div class="col-sm-2 bg-danger" id="third-day">
-                                <p class="third-date card-header"></p>
-                                <p class="third-icon"></p>
-                                <p class="third-temp"></p>
-                                <p class="third-humid"></p>
+                            <div class="col-sm-2" id="third-day">
+                                <p class="card-header" id="third-date"></p>
+                                <p id="third-icon"></p>
+                                <p id="third-temp"></p>
+                                <p id="third-humid"></p>
                             </div>
-                            <div class="col-sm-2 bg-warning" id="fourth-day">
-                                <p class="fourth-date card-header"></p>
-                                <p class="fourth-icon"></p>
-                                <p class="fourth-temp"></p>
-                                <p class="fourth-humid"></p>
+                            <div class="col-sm-2" id="fourth-day">
+                                <p class="card-header" id="fourth-date"></p>
+                                <p id="fourth-icon"></p>
+                                <p id="fourth-temp"></p>
+                                <p id="fourth-humid"></p>
                             </div>
-                            <div class="col-sm-2 bg-secondary" id="fifth-day">
-                                <p class="fifth-date card-header"></p>
-                                <p class="fifth-icon"></p>
-                                <p class="fifth-temp"></p>
-                                <p class="fifth-humid"></p>
+                            <div class="col-sm-2 bg-gradient-sky border border-light" id="fifth-day">
+                                <p class="card-header" id="fifth-date"></p>
+                                <p id="fifth-icon"></p>
+                                <p id="fifth-temp"></p>
+                                <p id="fifth-humid"></p>
                             </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     </div>
-
-
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

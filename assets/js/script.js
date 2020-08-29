@@ -28,9 +28,11 @@ var findCityEl = document.querySelector("#Submit");
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?q=";
-var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?cnt=6&q=London"
-var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
+var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=London"
+var sampleUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=London&appid=cd7fcf2b24666d2644afde8dd6cfcd12";
 var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?appid=" // UV API
+var uvDisplayEl = document.getElementById("uvColor");
+var tempColor = document.getElementById("tempColor");
 
 /* WEATHER API */
 fetch(sampleUrl).then(function(response) {
@@ -41,17 +43,13 @@ fetch(sampleUrl).then(function(response) {
 
         /* TEMPERATURE */  
         var tempEl = document.getElementById("temp-display");
-        var convertedTemp = (Math.floor((response.main.temp - 273.15) * 9/5 + 32)); //Converts, Rounds off and displays Temperature from K to F.
-        tempEl.innerHTML = convertedTemp + "&deg;F"; 
-        if (convertedTemp < 70){
-            var color = document.getElementById("temp")
-            color.classList.add("bg-gradient-primary");
-        } else if (response.value < 90){
-            var color = document.getElementById("temp")
-            color.classList.add("bg-gradient-warning");
-        } else if (response.value > 90){
-            var color = document.getElementById("temp")
-            color.classList.add("bg-gradient-danger");
+        tempEl.innerHTML = response.main.temp + "&deg;F"; 
+        if (response.main.tempp < 70){            
+            tempColor.classList.add("bg-gradient-primary");
+        } else if (response.main.temp < 90){
+            tempColor.classList.add("bg-gradient-warning");
+        } else if (response.main.temp > 90){
+            tempColor.classList.add("bg-gradient-danger");
         };
 
         /* HUMIDITY */  
@@ -74,14 +72,11 @@ fetch(sampleUrl).then(function(response) {
                 var uvEl =  document.getElementById("uv-display");
                 uvEl.innerText = response.value
                 if (response.value < 5){
-                    var color = document.getElementById("uv")
-                    color.classList.add("bg-gradient-success");
-                } else if (response.value < 10){
-                    var color = document.getElementById("uv")
-                    color.classList.add("bg-gradient-warning");
+                    uvDisplayEl.classList.add("bg-gradient-primary");
+                } else if (response.value > 4){
+                    uvDisplayEl.classList.add("bg-gradient-warning");
                 } else if (response.value > 9){
-                    var color = document.getElementById("uv")
-                    color.classList.add("bg-gradient-danger");
+                    uvDisplayEl.classList.add("bg-gradient-danger");
                 };
             
         });
@@ -91,10 +86,34 @@ fetch(sampleUrl).then(function(response) {
             return response.json();
           })
             .then(function(response) {
-                console.log(response)
-                var firstDateEl =  document.getElementById("first-date");
-                firstDateEl.innerText = response.value
-            
+                console.log(response);
+                // console.log(Math.floor((response.list[8].main.temp - 273.15) * 9/5 + 32));
+                /* FIRSTDAY */
+                var firstTempEl =  document.getElementById("first-temp");
+                firstTempEl.innerHTML = response.list[0].main.temp + "&deg;F";
+                var firstHumidEl = document.getElementById("first-humid");
+                firstHumidEl.innerText = response.list[0].main.humidity + "%";
+                /* SECONDDAY */
+                var secondTempEl =  document.getElementById("second-temp");
+                secondTempEl.innerHTML = response.list[8].main.temp + "&deg;F";
+                var secondHumidEl = document.getElementById("second-humid");
+                secondHumidEl.innerText = response.list[8].main.humidity + "%";
+                /* THIRDDAY */
+                var thirdTempEl =  document.getElementById("third-temp");
+                thirdTempEl.innerHTML = response.list[17].main.temp + "&deg;F";
+                var thirdHumidEl = document.getElementById("third-humid");
+                thirdHumidEl.innerText = response.list[17].main.humidity + "%";
+                /* FOURTHDAY */
+                var fourthTempEl =  document.getElementById("fourth-temp");
+                fourthTempEl.innerHTML = response.list[26].main.temp + "&deg;F";
+                var fourthHumidEl = document.getElementById("fourth-humid");
+                fourthHumidEl.innerText = response.list[26].main.humidity + "%";
+                /* FIFTHDAY */
+                var fifthTempEl =  document.getElementById("fifth-temp");
+                fifthTempEl.innerHTML = response.list[35].main.temp + "&deg;F";
+                var fifthHumidEl = document.getElementById("fifth-humid");
+                fifthHumidEl.innerText = response.list[35].main.humidity + "%";
+        
         });
 
 });
