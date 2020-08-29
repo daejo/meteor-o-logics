@@ -42,15 +42,18 @@ fetch(sampleUrl)
       return response.json();
     })
     .then(function(response) {
-        // console.log(response.list[0].main.temp)
+        console.log(response)
         /* TEMPERATURE */  
         var tempEl = document.getElementById("temp-display"); 
         tempEl.innerHTML = (Math.floor((response.list[0].main.temp - 273.15) * 9/5 + 32)) + "&deg;F"; //Converts, Rounds off and displays Temperature from K to F.
 
         /* HUMIDITY */  
         var humidEl = document.getElementById("humid-display"); 
-        humidEl.innerHTML = response.list[0].main.temp + "&deg;F"; 
-
+        humidEl.innerHTML = response.list[0].main.humidity + "&deg;F";
+        
+        /* WIND SPEED */  
+        var humidEl = document.getElementById("wind-display"); 
+        humidEl.innerHTML = response.list[0].wind.speed + "mph"; 
     });
 
 
