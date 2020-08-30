@@ -25,14 +25,17 @@ var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12"; // My Openweather API key.
 var findCityEl = document.querySelector("#Submit"); //
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
-var submitBtn = document.getElementById("Submit")
+var submitBtn = document.getElementById("Submit");
+var cityNameEl = document.getElementById("city-name");
+var uvDisplayEl = document.getElementById("uvColor")
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
-var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q=" //5-day Weather Forecast
-var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?" // UV API
+var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q="; //5-day Weather Forecast
+var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?"; // UV API
 
 var formSubmit = function(event) {
     event.preventDefault();
     var city = cityInputEl.value;
+    cityNameEl.innerText = cityInputEl.value
     searchCity(city);
 }
 
@@ -40,12 +43,9 @@ var searchCity = function(value) {
 
     /* WEATHER API */
     fetch(weatherUrl + value + "&appid=" + apiKey).then(function(response) {
-        console.log(weatherUrl + value + "&appid=" + apiKey)
         return response.json();
         })
-        .then(function(response) {
-            // console.log(response)
-    
+        .then(function(response) {  
             /* TEMPERATURE */  
             var tempEl = document.getElementById("temp-display");
             tempEl.innerHTML = response.main.temp + "&deg;F"; 
@@ -66,7 +66,6 @@ var searchCity = function(value) {
             windEl.innerText = response.wind.speed + "mph";
 
             var coordinates = "&lon=" + response.coord.lon + "&lat=" + response.coord.lat
-            console.log(coordinates)
 
             /* UV API */
         fetch(uvUrl + coordinates + "&appid=" + apiKey).then(function(response) {
@@ -91,10 +90,20 @@ var searchCity = function(value) {
         return response.json();
     })
     .then(function(response) {
+        console.log(response)
+        var firstIconEl = document.getElementById("wicon-one")
+        var secondIconEl = document.getElementById("wicon-two")
+        var thirdIconEl = document.getElementById("wicon-three")
+        var fourthIconEl = document.getElementById("wicon-four")
+        var fifthIconEl = document.getElementById("wicon-five")
+
         /* FIRSTDAY */
         var firstDateEl = document.getElementById("first-date");
         var dateOne = response.list[3].dt_txt;
         firstDateEl.innerText = dateOne.substr(5,6); // .substr(string start, # of characters included)
+        
+        var iconCodeOne = response.list[3].weather[0].icon
+        firstIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeOne + ".png"))
 
         var firstTempEl =  document.getElementById("first-temp");
         firstTempEl.innerHTML = response.list[3].main.temp + "&deg;F";
@@ -107,6 +116,9 @@ var searchCity = function(value) {
         var dateTwo = response.list[11].dt_txt;
         secondDateEl.innerText = dateTwo.substr(5,6);
 
+        var iconCodeTwo = response.list[11].weather[0].icon
+        secondIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeTwo + ".png"))
+
         var secondTempEl =  document.getElementById("second-temp");
         secondTempEl.innerHTML = response.list[11].main.temp + "&deg;F";
 
@@ -117,6 +129,9 @@ var searchCity = function(value) {
         var thirdDateEl = document.getElementById("third-date");
         var dateThree = response.list[19].dt_txt;
         thirdDateEl.innerText = dateThree.substr(5,6);
+
+        var iconCodeThree = response.list[19].weather[0].icon
+        thirdIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeThree + ".png"))
         
         var thirdTempEl =  document.getElementById("third-temp");
         thirdTempEl.innerHTML = response.list[19].main.temp + "&deg;F";
@@ -128,6 +143,9 @@ var searchCity = function(value) {
         var fourthDateEl = document.getElementById("fourth-date");
         var dateFour = response.list[19].dt_txt;
         fourthDateEl.innerText = dateFour.substr(5,6);
+
+        var iconCodeFour = response.list[27].weather[0].icon
+        fourthIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeFour + ".png"))
         
         var fourthTempEl =  document.getElementById("fourth-temp");
         fourthTempEl.innerHTML = response.list[27].main.temp + "&deg;F";
@@ -139,6 +157,9 @@ var searchCity = function(value) {
         var fifthDateEl = document.getElementById("fifth-date");
         var dateFive = response.list[35].dt_txt;
         fifthDateEl.innerText = dateFive.substr(5,6);
+
+        var iconCodeFive = response.list[35].weather[0].icon
+        fifthIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeFive + ".png"))
         
         var fifthTempEl =  document.getElementById("fifth-temp");
         fifthTempEl.innerHTML = response.list[35].main.temp + "&deg;F";

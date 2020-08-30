@@ -10,7 +10,7 @@
     <title>Meteor-o-Logics</title>
 </head>
 <body class="flex-column min-100-vh">    
-    <header class="jumbotron col-md-12 bg-dark sticky-top text-center"> 
+    <header class="jumbotron col-md-12 bg-dark text-center"> 
         <h1 class="display-2 bg-black text-white">Meteor-o-Logics</h1>
         <p class="lead bg-secondary text-white">Get accurate weather updates anytime, anywhere.</p>
         <p id="currentDay" class="lead text-white"></p>
@@ -37,7 +37,7 @@
 
             <div class="col-12 col-sm-8">
                 <div class="card city-row text-center">
-                    <h3 class="card-header bg-light text-dark" id="city-search-term">City Name</h3>
+                    <h3 class="card-header bg-light text-dark" id="city-name"></h3>
                     <p class="card-text" id="date-display"></p>
                     <div class="row text-center" id="display-row">
                         <div class="col-sm-3 pt-3" id="tempColor">Temperature: <p id="temp-display"></p></div>
@@ -52,31 +52,31 @@
                         <div class="col-sm-2">5 Day Forecast</div>
                             <div class="col-sm-2" id="first-day">
                                 <p class="card-header" id="first-date"></p>
-                                <p id="first-icon"></p>
+                                <div id="icon"><img id="wicon-one" alt="Weather icon"></div>
                                 <p id="first-temp"></p>
                                 <p id="first-humid"></p>
                             </div>
                             <div class="col-sm-2" id="second-day">
                                 <p class="card-header" id="second-date"></p>
-                                <p id="second-icon"></p>
+                                <div id="icon"><img id="wicon-two" alt="Weather icon"></div>
                                 <p id="second-temp"></p>
                                 <p id="second-humid"></p>
                             </div>
                             <div class="col-sm-2" id="third-day">
                                 <p class="card-header" id="third-date"></p>
-                                <p id="third-icon"></p>
+                                <div id="icon"><img id="wicon-three" alt="Weather icon"></div>
                                 <p id="third-temp"></p>
                                 <p id="third-humid"></p>
                             </div>
                             <div class="col-sm-2" id="fourth-day">
                                 <p class="card-header" id="fourth-date"></p>
-                                <p id="fourth-icon"></p>
+                                <div id="icon"><img id="wicon-four" alt="Weather icon"></div>
                                 <p id="fourth-temp"></p>
                                 <p id="fourth-humid"></p>
                             </div>
                             <div class="col-sm-2 border border-light" id="fifth-day">
                                 <p class="card-header" id="fifth-date"></p>
-                                <p id="fifth-icon"></p>
+                                <div id="icon"><img id="wicon-five" src="" alt="Weather icon"></div>
                                 <p id="fifth-temp"></p>
                                 <p id="fifth-humid"></p>
                             </div>
