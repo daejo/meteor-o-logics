@@ -10,6 +10,7 @@ var secondDayEl = document.getElementById("second-day");
 var thirdDayEl = document.getElementById("third-day");
 var fourthDayEl = document.getElementById("fourth-day");
 var fifthDayEl = document.getElementById("fifth-day");
+var searchListEl = document.getElementById("search-list");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
 var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q="; //5-day Weather Forecast
 var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?"; // UV API
@@ -22,27 +23,27 @@ var formSubmit = function(event) {
     function save() {
         var newCity = city //Link city input to new variable
         if (localStorage.getItem("cityName") === null){
-            localStorage.setItem("cityName", "[]"); //Sets info into an Array
+            localStorage.setItem("cityName", "[]"); //Sets info into an Array.
         }
-        var savedCity = JSON.parse(localStorage.getItem("cityName"));
+        var savedCity = JSON.parse(localStorage.getItem("cityName")); //Parse so its more readable.
         savedCity.push(newCity);
 
-        localStorage.setItem("cityName", JSON.stringify(savedCity)); 
+        localStorage.setItem("cityName", JSON.stringify(savedCity)); //Converts to string.
     };
 
     searchCity(city);
     save(city);
+    loadCity(city);
 };
 
+var loadCity = function(city) {
+    var cityList = document.createElement("li")
+    cityList.setAttribute("class", "list-group-item")
+    cityList.innerHTML = city
+    console.log(cityList)
+    searchListEl.appendChild(cityList);
 
-    
- 
-// var saveCity = function (value) {
-//     var cities = [savedCity, value]
-//     localStorage.setItem(“city”, cities);
-//     var savedCity = localStorage.getItem(“city”)
-//     console.log(savedCity);
-// }
+}
 
 var searchCity = function(value) {
 
