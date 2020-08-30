@@ -17,8 +17,3 @@
     background-image: linear-gradient(45deg, hsl(106, 100%, 21%) 0%, #0a9922 52%, #15ff00 90%);
     color: white;
 };
-
-#first-day {
-    background-image: linear-gradient(180deg, hsl(231, 100%, 63%) 0%, #2BD2FF 52%, #b0edff 90%);
-    color: white;
-};
