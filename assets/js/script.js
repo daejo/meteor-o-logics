@@ -1,28 +1,5 @@
-/*  CREATE A WEATHER APP
-
-    * Search for a city's weather conditions
-        - Create framework and flow.
-        - Add form for text to be inputed in.
-        - Add search function to look for cities.
-        - Present current and future conditions for that city and that city is added to the search history.
-    
-    * Display current weather conditions for that city
-        - Display name of city searched.
-        - Display date
-        - Display an icon for weather condition representation.
-        - Display temperature, humidity, wind speed, and UV index.
-
-    * UV index and future weather conditions
-        - Display color that indicates weather conditions as favorable, moderate, or severe.
-        - Present a 5-day forecast that displays date, icon of weather conditions, temperature, and humidity.
-
-    * Search history search
-        - Use stored local data city names
-        - Display the current and future conditions of a city upon clicking a it's name in the search history.
-
-*/
 var apiKey = "cd7fcf2b24666d2644afde8dd6cfcd12"; // My Openweather API key.
-var findCityEl = document.querySelector("#Submit"); //
+var findCityEl = document.querySelector("#Submit");
 var cityFormEl = document.querySelector("#city-form");
 var cityInputEl = document.getElementById("city-search");
 var submitBtn = document.getElementById("Submit");
@@ -40,18 +17,41 @@ var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?"; // UV API
 var formSubmit = function(event) {
     event.preventDefault();
     cityNameEl.innerText = cityInputEl.value
-    var city = cityInputEl.value; 
+    var city = cityInputEl.value;
+    
+    function save() {
+        var newCity = city //Link city input to new variable
+        if (localStorage.getItem("cityName") === null){
+            localStorage.setItem("cityName", "[]"); //Sets info into an Array
+        }
+        var savedCity = JSON.parse(localStorage.getItem("cityName"));
+        savedCity.push(newCity);
+
+        localStorage.setItem("cityName", JSON.stringify(savedCity)); 
+    };
+
     searchCity(city);
-}
+    save(city);
+};
+
+
+    
+ 
+// var saveCity = function (value) {
+//     var cities = [savedCity, value]
+//     localStorage.setItem(“city”, cities);
+//     var savedCity = localStorage.getItem(“city”)
+//     console.log(savedCity);
+// }
 
 var searchCity = function(value) {
 
     /* WEATHER API */
-    fetch(weatherUrl + value + "&appid=" + apiKey).then(function(response) {
+    fetch(weatherUrl + value + "&appid=" + apiKey).then(function(response) { //Weather API link with input and appkey
         return response.json();
         })
         .then(function(response) { 
-            console.log(response)
+            
             var IconEl = document.getElementById("wicon")
             
             var iconCode = response.weather[0].icon
@@ -60,7 +60,7 @@ var searchCity = function(value) {
             /* TEMPERATURE */  
             var tempEl = document.getElementById("temp-display");
             tempEl.innerHTML = response.main.temp + "&deg;F"; 
-            if (response.main.temp < 70){            
+            if (response.main.temp < 70){ //Color change parameters        
                 tempColor.setAttribute("style", "background-image: linear-gradient(45deg, hsl(231, 100%, 56%) 0%, #2BD2FF 52%, #a8cbff 90%); color: white;");
             } else if (response.main.temp < 90){
                 tempColor.setAttribute("style", "background-image: linear-gradient(45deg, hsl(46, 100%, 30%) 0%, #e2c000 52%, #ffd900 90%); color: white;");
@@ -78,8 +78,8 @@ var searchCity = function(value) {
 
             var coordinates = "&lon=" + response.coord.lon + "&lat=" + response.coord.lat
 
-            /* UV API */
-        fetch(uvUrl + coordinates + "&appid=" + apiKey).then(function(response) {
+        /* UV API */
+        fetch(uvUrl + coordinates + "&appid=" + apiKey).then(function(response) { //UV API link with coordinates and appkey
             return response.json();
         })
             .then(function(response) {
@@ -97,7 +97,7 @@ var searchCity = function(value) {
         });   
 
     /* FORECAST API */
-    fetch(forecastUrl + value + "&appid=" + apiKey).then(function(response) {
+    fetch(forecastUrl + value + "&appid=" + apiKey).then(function(response) { //Forecast API link with coordinates and appkey
         return response.json();
     })
     .then(function(response) {
@@ -112,8 +112,8 @@ var searchCity = function(value) {
         var dateOne = response.list[0].dt_txt;
         firstDateEl.innerText = dateOne.substr(5,6); // .substr(string start, # of characters included)
         
-        var iconCodeOne = response.list[0].weather[0].icon
-        firstIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeOne + ".png"))
+        var iconCodeOne = response.list[0].weather[0].icon // Finds appropriate icon.
+        firstIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeOne + ".png")) //Embed's icon into HTML
 
         var firstTempEl =  document.getElementById("first-temp");
         firstTempEl.innerHTML = response.list[0].main.temp + "&deg;F";
@@ -215,6 +215,7 @@ var searchCity = function(value) {
 };
 
 submitBtn.addEventListener("click", formSubmit);
+
 
 
 
