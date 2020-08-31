@@ -11,9 +11,9 @@ var thirdDayEl = document.getElementById("third-day");
 var fourthDayEl = document.getElementById("fourth-day");
 var fifthDayEl = document.getElementById("fifth-day");
 var searchListEl = document.getElementById("search-list");
-var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
-var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q="; //5-day Weather Forecast
-var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?"; // UV API
+var weatherUrl = "https://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
+var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast?units=imperial&q="; //5-day Weather Forecast
+var uvUrl = "https://api.openweathermap.org/data/2.5/uvi?"; // UV API
 var citySave = [];
 
 var formSubmit = function(event) {
@@ -28,11 +28,8 @@ var formSubmit = function(event) {
         
         searchListEl.appendChild(cityList);
         citySave.push(newCity);
-
         localStorage.setItem("cityName", JSON.stringify(citySave));
-
         searchCity(newCity);
-
     } else {
         alert("Please enter a city.");
     }
