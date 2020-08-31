@@ -14,36 +14,55 @@ var searchListEl = document.getElementById("search-list");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
 var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q="; //5-day Weather Forecast
 var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?"; // UV API
+var pastSearch = [];
 
 var formSubmit = function(event) {
     event.preventDefault();
     cityNameEl.innerText = cityInputEl.value
     var city = cityInputEl.value;
     
-    function save() {
-        var newCity = city //Link city input to new variable
-        if (localStorage.getItem("cityName") === null){
-            localStorage.setItem("cityName", "[]"); //Sets info into an Array.
-        }
-        var savedCity = JSON.parse(localStorage.getItem("cityName")); //Parse so its more readable.
-        savedCity.push(newCity);
+    var newCity = city //Link city input to new variable
 
-        localStorage.setItem("cityName", JSON.stringify(savedCity)); //Converts to string.
-    };
+    if (newCity) { //Creates list element and saves to storage
+        cityList = document.createElement("li");
+        cityList.innerHTML="<a href='#' class='list-group-item'>"+newCity+"</a>";
+        
+        searchListEl.appendChild(cityList);
+        pastSearch.push(cityList);
+        localStorage.setItem("cityName", JSON.stringify(pastSearch));
+        console.log(newCity)
+        searchCity(newCity);
+        inputValue.value = "";
 
-    searchCity(city);
-    save(city);
-    loadCity(city);
+    } else {
+        alert("Please enter a city.");
+    }
+
 };
 
-var loadCity = function(city) {
-    var cityList = document.createElement("li")
-    cityList.setAttribute("class", "list-group-item")
-    cityList.innerHTML = city
-    console.log(cityList)
-    searchListEl.appendChild(cityList);
 
+var localSafe = function () {
+    // local storage
+   var savedCity = JSON.parse(localStorage.getItem("cityName"));
+   if (savedCity === null) {
+       return;
+   }
+   else {
+       for (var i = 0; i < savedCity.length; i++) {
+           cityList = document.createElement("li");
+           cityList.className = "nav-item";
+           cityList.innerHTML="<a href='#' class='list-group-item'>"+savedCity[i]+"</a>";
+           recentSearch.appendChild(cityList);
+       }
+   }
 }
+
+// var loadList = function() {
+//     var savedCity = JSON.parse(localStorage.getItem("cityName")); //Parse so its more readable.
+//     for (var i = 0 ; i > savedCity.length; i--) {
+//         console.log(savedCity[i])
+//     }
+// }
 
 var searchCity = function(value) {
 
