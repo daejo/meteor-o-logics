@@ -24,7 +24,7 @@ var formSubmit = function(event) {
 
     if (newCity) { //Creates list element and saves to storage
         cityList = document.createElement("li");
-        cityList.innerHTML="<a href='#' class='list-group-item list-group-item-action list-group-item-secondary'><span data-feather='file'></span>" + newCity + "</a>";
+        cityList.innerHTML="<a href='#' class='list-group-item list-group-item-action list-group-item-secondary'><span data-feather='file'></span>"+newCity+"</a>";
         
         searchListEl.appendChild(cityList);
         citySave.push(newCity);
@@ -32,7 +32,6 @@ var formSubmit = function(event) {
         localStorage.setItem("cityName", JSON.stringify(citySave));
 
         searchCity(newCity);
-        inputValue.value = "";
 
     } else {
         alert("Please enter a city.");
@@ -40,7 +39,7 @@ var formSubmit = function(event) {
 
 };
 
-var loadCity = function () {
+var loadCity = function () { //Loads and creates items from local storage
    var cityName = JSON.parse(localStorage.getItem("cityName"));
    
    if (cityName === null) {
@@ -49,7 +48,7 @@ var loadCity = function () {
    else {
        for (var i = 0; i < cityName.length; i++) {
            cityList = document.createElement("li");
-           cityList.innerHTML="<a href='#' class='list-group-item list-group-item-action list-group-item-secondary'><span data-feather='file'></span>" + cityName[i] + "</a>";
+           cityList.innerHTML="<a href='#' class='list-group-item list-group-item-action list-group-item-secondary'><span data-feather='file'></span>"+cityName[i]+"</a>";
            searchListEl.appendChild(cityList);
        }
    }
@@ -58,7 +57,7 @@ var loadCity = function () {
 var pastCitySearch = function (event) { //Links past search to searchCity
     var cityName = event.target.textContent;
     searchCity(cityName);
-}
+};
 
 
 var searchCity = function(value) {
@@ -68,7 +67,7 @@ var searchCity = function(value) {
         return response.json();
         })
         .then(function(response) { 
-            cityNameEl.innerText = value;
+            cityNameEl.innerText = value; //Displays City Name.
             var IconEl = document.getElementById("wicon");
             
             var iconCode = response.weather[0].icon;
