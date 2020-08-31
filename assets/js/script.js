@@ -68,7 +68,7 @@ var searchCity = function(value) {
             var IconEl = document.getElementById("wicon");
             
             var iconCode = response.weather[0].icon;
-            IconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCode + ".png"));
+            IconEl.setAttribute("src", ("https://openweathermap.org/img/w/" + iconCode + ".png"));
 
             /* TEMPERATURE */  
             var tempEl = document.getElementById("temp-display");
@@ -126,7 +126,7 @@ var searchCity = function(value) {
         firstDateEl.innerText = dateOne.substr(5,6); // .substr(string start, # of characters included)
         
         var iconCodeOne = response.list[0].weather[0].icon // Finds appropriate icon.
-        firstIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeOne + ".png")) //Embed's icon into HTML
+        firstIconEl.setAttribute("src", ("https://openweathermap.org/img/w/" + iconCodeOne + ".png")) //Embed's icon into HTML
 
         var firstTempEl =  document.getElementById("first-temp");
         firstTempEl.innerHTML = response.list[0].main.temp + "&deg;F";
@@ -147,7 +147,7 @@ var searchCity = function(value) {
         secondDateEl.innerText = dateTwo.substr(5,6);
 
         var iconCodeTwo = response.list[8].weather[0].icon
-        secondIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeTwo + ".png"))
+        secondIconEl.setAttribute("src", ("https://openweathermap.org/img/w/" + iconCodeTwo + ".png"))
 
         var secondTempEl =  document.getElementById("second-temp");
         secondTempEl.innerHTML = response.list[8].main.temp + "&deg;F";
@@ -168,7 +168,7 @@ var searchCity = function(value) {
         thirdDateEl.innerText = dateThree.substr(5,6);
 
         var iconCodeThree = response.list[16].weather[0].icon
-        thirdIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeThree + ".png"))
+        thirdIconEl.setAttribute("src", ("https://openweathermap.org/img/w/" + iconCodeThree + ".png"))
         
         var thirdTempEl =  document.getElementById("third-temp");
         thirdTempEl.innerHTML = response.list[16].main.temp + "&deg;F";
@@ -189,7 +189,7 @@ var searchCity = function(value) {
         fourthDateEl.innerText = dateFour.substr(5,6);
 
         var iconCodeFour = response.list[24].weather[0].icon
-        fourthIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeFour + ".png"))
+        fourthIconEl.setAttribute("src", ("https://openweathermap.org/img/w/" + iconCodeFour + ".png"))
         
         var fourthTempEl =  document.getElementById("fourth-temp");
         fourthTempEl.innerHTML = response.list[24].main.temp + "&deg;F";
@@ -210,7 +210,7 @@ var searchCity = function(value) {
         fifthDateEl.innerText = dateFive.substr(5,6);
 
         var iconCodeFive = response.list[32].weather[0].icon
-        fifthIconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCodeFive + ".png"))
+        fifthIconEl.setAttribute("src", ("https://openweathermap.org/img/w/" + iconCodeFive + ".png"))
         
         var fifthTempEl =  document.getElementById("fifth-temp");
         fifthTempEl.innerHTML = response.list[32].main.temp + "&deg;F";
