@@ -18,14 +18,13 @@ var citySave = [];
 
 var formSubmit = function(event) {
     event.preventDefault();
-    // cityNameEl.innerText = cityInputEl.value
     var city = cityInputEl.value;
     
     var newCity = city //Link city input to new variable
 
     if (newCity) { //Creates list element and saves to storage
         cityList = document.createElement("li");
-        cityList.innerHTML="<a href='#' class='list-group-item'><span data-feather='file'></span>"+newCity+"</a>";
+        cityList.innerHTML="<a href='#' class='list-group-item list-group-item-action list-group-item-secondary'><span data-feather='file'></span>" + newCity + "</a>";
         
         searchListEl.appendChild(cityList);
         citySave.push(newCity);
@@ -50,13 +49,13 @@ var loadCity = function () {
    else {
        for (var i = 0; i < cityName.length; i++) {
            cityList = document.createElement("li");
-           cityList.innerHTML="<a href='#' class='list-group-item'><span data-feather='file'></span>"+cityName[i]+"</a>";
+           cityList.innerHTML="<a href='#' class='list-group-item list-group-item-action list-group-item-secondary'><span data-feather='file'></span>" + cityName[i] + "</a>";
            searchListEl.appendChild(cityList);
        }
    }
 };
 
-var pastCitySearch = function (event) {
+var pastCitySearch = function (event) { //Links past search to searchCity
     var cityName = event.target.textContent;
     searchCity(cityName);
 }
