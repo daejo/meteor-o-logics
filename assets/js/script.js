@@ -14,7 +14,7 @@ var searchListEl = document.getElementById("search-list");
 var weatherUrl = "http://api.openweathermap.org/data/2.5/weather?units=imperial&q="; //Weather API
 var forecastUrl = "http://api.openweathermap.org/data/2.5/forecast?units=imperial&q="; //5-day Weather Forecast
 var uvUrl = "http://api.openweathermap.org/data/2.5/uvi?"; // UV API
-var pastSearch = [];
+var citySave = [];
 
 var formSubmit = function(event) {
     event.preventDefault();
@@ -25,12 +25,13 @@ var formSubmit = function(event) {
 
     if (newCity) { //Creates list element and saves to storage
         cityList = document.createElement("li");
-        cityList.innerHTML="<a href='#' class='list-group-item'>"+newCity+"</a>";
+        cityList.innerHTML="<a href='#' class='list-group-item'><span data-feather='file'></span>"+newCity+"</a>";
         
         searchListEl.appendChild(cityList);
-        pastSearch.push(cityList);
-        localStorage.setItem("cityName", JSON.stringify(pastSearch));
-        console.log(newCity)
+        citySave.push(newCity);
+
+        localStorage.setItem("cityName", JSON.stringify(citySave));
+
         searchCity(newCity);
         inputValue.value = "";
 
@@ -40,29 +41,23 @@ var formSubmit = function(event) {
 
 };
 
-
-var localSafe = function () {
-    // local storage
-   var savedCity = JSON.parse(localStorage.getItem("cityName"));
-   if (savedCity === null) {
+var loadCity = function () {
+   var cityName = JSON.parse(localStorage.getItem("cityName"));
+   
+   if (cityName === null) {
        return;
    }
    else {
-       for (var i = 0; i < savedCity.length; i++) {
+       for (var i = 0; i < cityName.length; i++) {
            cityList = document.createElement("li");
-           cityList.className = "nav-item";
-           cityList.innerHTML="<a href='#' class='list-group-item'>"+savedCity[i]+"</a>";
-           recentSearch.appendChild(cityList);
+           cityList.innerHTML="<a href='#' class='list-group-item'><span data-feather='file'></span>"+cityName[i]+"</a>";
+           searchListEl.appendChild(cityList);
        }
    }
-}
+};
 
-// var loadList = function() {
-//     var savedCity = JSON.parse(localStorage.getItem("cityName")); //Parse so its more readable.
-//     for (var i = 0 ; i > savedCity.length; i--) {
-//         console.log(savedCity[i])
-//     }
-// }
+
+
 
 var searchCity = function(value) {
 
@@ -234,6 +229,7 @@ var searchCity = function(value) {
     });    
 };
 
+loadCity();
 submitBtn.addEventListener("click", formSubmit);
 
 
