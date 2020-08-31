@@ -18,7 +18,7 @@ var citySave = [];
 
 var formSubmit = function(event) {
     event.preventDefault();
-    cityNameEl.innerText = cityInputEl.value
+    // cityNameEl.innerText = cityInputEl.value
     var city = cityInputEl.value;
     
     var newCity = city //Link city input to new variable
@@ -56,7 +56,10 @@ var loadCity = function () {
    }
 };
 
-
+var pastCitySearch = function (event) {
+    var cityName = event.target.textContent;
+    searchCity(cityName);
+}
 
 
 var searchCity = function(value) {
@@ -66,11 +69,11 @@ var searchCity = function(value) {
         return response.json();
         })
         .then(function(response) { 
+            cityNameEl.innerText = value;
+            var IconEl = document.getElementById("wicon");
             
-            var IconEl = document.getElementById("wicon")
-            
-            var iconCode = response.weather[0].icon
-            IconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCode + ".png"))
+            var iconCode = response.weather[0].icon;
+            IconEl.setAttribute("src", ("http://openweathermap.org/img/w/" + iconCode + ".png"));
 
             /* TEMPERATURE */  
             var tempEl = document.getElementById("temp-display");
@@ -231,6 +234,7 @@ var searchCity = function(value) {
 
 loadCity();
 submitBtn.addEventListener("click", formSubmit);
+searchListEl.addEventListener("click", pastCitySearch);
 
 
 
